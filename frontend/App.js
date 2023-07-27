@@ -4,11 +4,13 @@ import axios from "axios";
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
 import useLocalStorage from "./hooks/useLocalStorage.js";
+import geceModuAc from "./hooks/geceModuAc";
 
 const App = () => {
   const [coinData, setCoinData] = useState([]);
-  const [geceModu, setGeceModu] = useState(false);
-  const [data2, setData2] = useLocalStorage("gecemodu" , "garanlıklar lordu");
+  const [geceModu, setGeceModu] = geceModuAc(false);
+  const [data2, setData2] = useLocalStorage("geceModu" , "garanlıklar lordu");
+  const [login, setLoginInfo] = useLocalStorage("login", false);
 
  /*  useEffect(() => {
     axios
@@ -21,7 +23,15 @@ const App = () => {
   return (
     <div className={geceModu ? "dark-mode App" : "App"}>
       {data2}
-      <Navbar geceModu={geceModu} setGeceModu={setGeceModu} />
+      <button type="button" onClick={()=>setData2("set me")}>
+        Button
+      </button>
+
+      <button type="button" onClick={()=>setLoginInfo(!login)}>
+        isLoggedin : {login.toString()}
+      </button>
+
+      <Navbar  geceModu={geceModu} setGeceModu={setGeceModu}  />
      {/*  <Charts coinData={coinData} /> */}
     </div>
   );

@@ -4,15 +4,20 @@ function useLocalStorage(key, initialData ){
     const [data, setData] = useState(initialData);
 
     useEffect(() => {
-        if (window.localStorage.getItem(key) === null) {
-            window.localStorage.setItem(key, data );
+        if (localStorage.getItem(key) === null) {
+            localStorage.setItem(key, JSON.stringify(data) );
         } else {
-            const lsData = windows.localStorage.getItem(key);
+            const lsData = JSON.parse(localStorage.getItem(key));
             setData(lsData);
         }
     }, [data]);
 
-    return [data, setData];
+    const writeToLocalStorage = newData => {
+        localStorage.setItem(key, JSON.stringify(newData));
+        setData(newData);
+    };
+
+    return [data, writeToLocalStorage];
 }
 
 export default useLocalStorage;
