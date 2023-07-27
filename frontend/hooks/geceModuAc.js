@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+/* import React, { useState } from "react"; */
+import useLocalStorage from "./useLocalStorage";
 
 function geceModuAc(initialMode) {
-    const [geceModu, setGeceModu] = useState(initialMode);
+    const [geceModu, setGeceModu] = useLocalStorage("geceModu",initialMode);
 
     const toggleMode = () => {
         /* preventDefault(); */
