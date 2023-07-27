@@ -3,23 +3,26 @@ import axios from "axios";
 
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
+import useLocalStorage from "./hooks/useLocalStorage.js";
 
 const App = () => {
   const [coinData, setCoinData] = useState([]);
   const [geceModu, setGeceModu] = useState(false);
+  const [data2, setData2] = useLocalStorage("gecemodu" , "garanlıklar lordu");
 
-  useEffect(() => {
+ /*  useEffect(() => {
     axios
       .get(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true"
       )
       .then(res => setCoinData(res.data))
       .catch(err => console.log(err));
-  }, []);
+  }, []); */
   return (
     <div className={geceModu ? "dark-mode App" : "App"}>
+      {data2}
       <Navbar geceModu={geceModu} setGeceModu={setGeceModu} />
-      <Charts coinData={coinData} />
+     {/*  <Charts coinData={coinData} /> */}
     </div>
   );
 };
